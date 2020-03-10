@@ -1,0 +1,21 @@
+<form id="formEle" [formGroup]="myFormGroup" (ngSubmit)="onSubmit()">
+  <div  *ngFor="let form_elem of formJsonData">
+  <div [ngSwitch]="form_elem.type">
+    <label for="{{form_elem.label}}">{{form_elem.label}}:</label>
+    <div *ngSwitchCase="'text'" class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span *ngIf="form_elem.icon.length>0" class="input-group-text">@</span>
+      </div>
+      <input class="form-control" type="text" formControlName="{{form_elem.label}}"/>
+    </div>
+    <div *ngSwitchCase="'dropdown'">
+      <select class="custom-select" formControlName="{{form_elem.label}}">
+        <option *ngFor="let opt of form_elem.options">
+          {{opt.label}}
+        </option>
+      </select>
+    </div>
+  </div>  
+  </div>
+  <input type="submit" value="save"/>
+</form>
